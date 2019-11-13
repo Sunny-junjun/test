@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		ul{
+			list-style: none;
+			margin: 0;
+			padding:0;
+		}
+		#tabs{
+			width: 1200px;
+			border:1px solid;
+			display: flex;
+			justify-content: space-around;
+		}
+		.tabs{
+			display:flex;
+		}
+		.tabs_box{
+			width: 500px;
+		}
+		.tabs li{
+			padding: 10px;
+			padding-left: 28px;
+		/* 	10是上边设计的，14图片的宽度，4图片和字的距离 */
+			font-size: 18px;
+			background: url('image/icon1.png') no-repeat 10px center;
+		}
+		.tabs .cur{
+			color: #046fbb;
+		}
+		.contents div{
+			height: 200px;
+			font-size: 14px;
+			line-height: 1.5;
+			display: none;
+		}
+		.contents .show{
+			display: block;
+		}
+	</style>
+</head>
+<body>
+	<div id="tabs">
+		<div id="tabs1" class="tabs_box">
+			<ul class="tabs"> <!-- act:active cur:current -->
+				<li class="cur">学院新闻</li>
+				<li>通知公告</li>
+				<li>学术动态</li>
+			</ul>
+			<div class="contents">
+				<div class="show">学院新闻的内容：Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,</div>
+				<div>学院公告的内容：Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo</div>
+				<div>学院动态的内容：Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+			</div>
+		</div>
+		<div id="tabs2" class="tabs_box">
+			<ul class="tabs"> <!-- act:active cur:current -->
+				<li class="cur">学院新闻</li>
+				<li>通知公告</li>
+				<li>学术动态</li>
+			</ul>
+			<div class="contents">
+				<div class="show">学院新闻的内容：Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+				<div>学院公告的内容：Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo</div>
+				<div>学院动态的内容：Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</div>
+			</div>
+		</div>
+		<div id="tabs3" class="tabs_box">
+			<ul class="tabs"> <!-- act:active cur:current -->
+				<li class="cur">学院新闻</li>
+				<li>通知公告</li>
+				<li>学术动态</li>
+			</ul>
+			<div class="contents">
+				<div class="show">学院新闻的内容：
+				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo</div>
+				<div>学院公告的内容：
+				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse</div>
+				<div>学院动态的内容：
+				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		//选项卡：点击每个选项，被点击的选项具有特殊样式，其它选项样式正常，被点击的选项对应的选项内容显示，其他选项内容不显示,编写思路：全清，单设。
+		function tab(id){
+		//获取选项卡容器
+		var box=document.getElementById(id);
+		//获取所有选项
+		var ul=box.getElementsByClassName('tabs')[0];
+		var lis=ul.getElementsByTagName('li');
+		//获取所有选项内容
+		var div=box.getElementsByClassName('contents')[0];
+		var divs=div.getElementsByTagName('div');
+		for(var i=0;i<lis.length;i++){
+			lis[i].index=i;//所有选项设置index属性，保存选项的索引序号
+			//给所欲选项绑定点击事件
+			lis[i].onclick=function(){
+				//所有选项样式恢复正常
+				for(var i=0;i<lis.length;i++){
+					//lis[i].className=''; //class值设置为空，没有去掉class属性
+					lis[i].removeAttribute('class');//去掉class属性
+				}
+				//所有选项内容不显示
+				for(var i=0;i<divs.length;i++){
+					//lis[i].className=''; //class值设置为空，没有去掉class属性
+					divs[i].removeAttribute('class'); //被点击的选项具对应的选项内容显示
+			}
+			this.className='cur'; //被点击的选项具有特殊样式
+			divs[this.index].className='show';
+		}
+	}
+}
+tab('tabs1');
+tab('tabs2');
+tab('tabs3');
+	</script>
+</body>
+</html>
